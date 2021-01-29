@@ -25,7 +25,6 @@ export class TaskService {
             const remainTasks = [];
             tasks.forEach(
                 (task) => {
-                    console.log(task.indexOrder);
                     if (!indexList.includes(task.indexOrder)) {
                         remainTasks.push(task);
                     }
