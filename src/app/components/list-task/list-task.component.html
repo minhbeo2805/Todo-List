@@ -1,0 +1,98 @@
+<div class="task-search">
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <div class="header-col">
+                    <p>To Do List</p>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="filter-col">
+                <ion-input class="input-border" placeholder="Search ..." type="text" [(ngModel)]="filterText"
+                           (ionChange)="filterTask()"></ion-input>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</div>
+<div style="height: 100%">
+    <form [formGroup]="updateForm">
+        <div class="task-container" *ngFor="let task of displayTasks; index as i">
+            <ion-card>
+                <ion-card-header>
+                    <ion-item lines="none">
+                        <ion-checkbox
+                                (ionChange)="checkboxChange(task.indexOrder)"
+                                class="checkbox-square"></ion-checkbox>
+                        <ion-label> {{task.title}}</ion-label>
+
+                        <ion-button size="medium" style="float:right" color="secondary" (click)="showDetail(i)">Detail
+                        </ion-button>
+                        <ion-button size="medium" style="float:right" color="danger"
+                                    (click)="removeSingleTask(task.indexOrder)">
+                            Remove
+                        </ion-button>
+                    </ion-item>
+                </ion-card-header>
+
+                <ion-card-content class="task-detail" [hidden]="true" id="task{{i}}">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>
+                                <ion-input class="input-border" type="text"
+                                           [ngClass]="{'error': updateForm.controls.title.touched && !updateForm.controls.title.valid}"
+                                           formControlName="title"></ion-input>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <div class="col-label"><p>Description</p></div>
+                                <div>
+                                    <ion-textarea inputmode="text" formControlName="description"
+                                                  class="input-bold-border desc-input"></ion-textarea>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size-lg="6" size-md="12">
+                                <div class="col-label"><p>Due Date</p></div>
+                                <div>
+                                    <ion-datetime
+                                            [ngClass]="{'error': updateForm.controls.dueDate.touched && !updateForm.controls.dueDate.valid}"
+                                            min="2010" max="2030" class="input-bold-border"
+                                            displayFormat="DD MMM YYYY"
+                                            formControlName="dueDate"></ion-datetime>
+                                </div>
+                            </ion-col>
+                            <ion-col size-lg="6" size-md="12">
+                                <div class="col-label"><p>Priority</p></div>
+                                <div>
+                                    <ion-select class="input-bold-border" formControlName="priority">
+                                        <ion-select-option
+                                                *ngFor="let option of priorityList">{{option}}</ion-select-option>
+                                    </ion-select>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-button expand="block" color="success" class="submit-btn" type="button"
+                                            [disabled]="!updateForm.valid"
+                                            (click)="updateTask(i)">Update
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
+        </div>
+    </form>
+
+</div>
+<div class="bulk-action" *ngIf="checkedIndex.length>0">
+    <ion-item lines="none">
+        <ion-label>Bulk Action:</ion-label>
+        <ion-button size="medium" color="primary">Done</ion-button>
+        <ion-button size="medium" color="danger" (click)="removeMultiTask()">Remove</ion-button>
+    </ion-item>
+</div>

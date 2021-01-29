@@ -1,0 +1,38 @@
+:host {
+  .header-col {
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .error {
+    border: 1px solid red !important;
+  }
+
+  ion-col {
+    padding: 10px 35px;
+
+    ion-button {
+      text-transform: none;
+    }
+
+    .input-border {
+      border: solid #BDBDBD 1px;
+    }
+
+    .input-bold-border {
+      border: solid #000000 1px;
+    }
+
+    .col-label {
+      font-size: 12px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .desc-input {
+      height: 125px;
+    }
+  }
+}

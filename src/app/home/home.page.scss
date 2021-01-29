@@ -1,27 +1,19 @@
-#container {
-  text-align: center;
+:host {
+  ion-grid {
+    position: relative;
+    height: 100% !important;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
+    ion-row {
+      height: 100% !important;
+    }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+    ion-col {
+      border: 1px solid black;
+      padding: unset;
+    }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+    ion-col:first-child {
+      border-right: unset;
+    }
+  }
 }

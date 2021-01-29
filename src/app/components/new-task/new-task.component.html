@@ -1,0 +1,53 @@
+<form [formGroup]="taskForm" (ngSubmit)="createTask()">
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <div class="header-col">
+                    <p>New Task</p>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-input class="input-border" placeholder="Add new task ..." type="text"
+                           formControlName="title"
+                           [ngClass]="{'error': taskForm.controls.title.touched && !taskForm.controls.title.valid}"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <div class="col-label"><p>Description</p></div>
+                <div>
+                    <ion-textarea inputmode="text" class="input-bold-border desc-input"
+                                  formControlName="description"></ion-textarea>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size-lg="6" size-md="12">
+                <div class="col-label"><p>Due Date</p></div>
+                <div>
+                    <ion-datetime min="2010" max="2030" class="input-bold-border"
+                                  [ngClass]="{'error': taskForm.controls.dueDate.touched && !taskForm.controls.dueDate.valid}"
+                                  displayFormat="DD MMM YYYY"
+                                  formControlName="dueDate"></ion-datetime>
+                </div>
+            </ion-col>
+            <ion-col size-lg="6" size-md="12">
+                <div class="col-label"><p>Priority</p></div>
+                <div>
+                    <ion-select class="input-bold-border" formControlName="priority">
+                        <ion-select-option *ngFor="let option of priorityList">{{option}}</ion-select-option>
+                    </ion-select>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button expand="block" color="success" class="submit-btn" type="submit"
+                            [disabled]="!taskForm.valid">Add
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</form>
